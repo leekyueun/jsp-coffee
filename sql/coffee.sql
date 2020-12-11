@@ -88,3 +88,19 @@ group by
     shop.scode, shop.sname
 order by
     scode asc
+
+
+select
+    product.pcode, product.name,
+    sum(product.cost * salelist.amount) as total_cost
+from
+    tbl_product_01 product,
+    tbl_shop_01 shop,
+    tbl_salelist_01 salelist
+where
+    salelist.pcode = product.pcode and
+    salelist.scode = shop.scode
+group by
+    product.pcode, product.name
+order by
+    pcode asc
