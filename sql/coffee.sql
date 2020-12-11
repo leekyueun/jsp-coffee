@@ -54,3 +54,23 @@ insert into tbl_salelist_01 values ( '100012', 'AA03', '20180902', 'S002', 50)
 insert into tbl_salelist_01 values ( '100013', 'AA04', '20180902', 'S002', 50)
 insert into tbl_salelist_01 values ( '100014', 'AA05', '20180902', 'S004', 20)
 insert into tbl_salelist_01 values ( '100015', 'AA01', '20180902', 'S003', 30)
+
+
+select
+    salelist.saleno, salelist.pcode, salelist.saledate,
+    salelist.scode, product.name, salelist.amount,
+    sum(product.cost * salelist.amount) as  total_cost
+from
+    tbl_product_01 product,
+    tbl_shop_01 shop,
+    tbl_salelist_01 salelist
+where
+    salelist.pcode = product.pcode and
+    salelist.scode = shop.scode
+group by
+    product.pcode, salelist.saleno, product.name, salelist.pcode, salelist.saledate, 
+    salelist.scode, salelist.amount
+order by
+    salelist.saleno ASC
+
+
