@@ -74,3 +74,17 @@ order by
     salelist.saleno ASC
 
 
+select
+    shop.scode, shop.sname,
+    sum(product.cost * salelist.amount) as total_cost
+from
+    tbl_product_01 product,
+    tbl_shop_01 shop,
+    tbl_salelist_01 salelist
+where
+    salelist.pcode = product.pcode and
+    salelist.scode = shop.scode
+group by
+    shop.scode, shop.sname
+order by
+    scode asc
